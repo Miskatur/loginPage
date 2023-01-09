@@ -1,10 +1,13 @@
 import './App.css';
-import LoginPage from './modal/LoginPage';
+// import LoginPage from './modal/LoginPage';
+import SignUp from './SignUp/SignUp';
 
 function App() {
   return (
     <div>
-      <LoginPage></LoginPage>
+      {/* <LoginPage></LoginPage> */}
+      <SignUp></SignUp>
+
     </div>
   );
 }

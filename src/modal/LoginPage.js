@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import sidepic from '../assets/Frame.svg'
 import vector from '../assets/Vector.svg'
 import './LoginPage.css'
 import { FcGoogle } from "react-icons/fc";
 import { AiOutlineLock, AiOutlineMail } from "react-icons/ai";
+import { useForm } from 'react-hook-form';
+
 
 const LoginPage = () => {
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const [radio, setRadio] = useState('')
+
+    const onSubmit = (data, event) => {
+        event.preventDefault()
+        const email = data.email;
+        const password = data.password;
+        console.log(email, password)
+    };
+    console.log(radio);
     return (
         <div className='h-screen mb-5'>
             <div className='grid xl:grid-cols-3 h-full relative '>
@@ -37,35 +51,58 @@ const LoginPage = () => {
                         <span className="border border-1 w-full bg-[#5D91FF]"></span>
                     </div>
 
-                    <form action="" className='w-full flex justify-center flex-col items-center'>
+                    <form className='w-full flex justify-center flex-col items-center' onSubmit={handleSubmit(onSubmit)}>
                         <div className='mt-3'>
                             <div className="flex border border-1 border-[#2068FF] sm:rounded-full overflow-hidden xs:m-2 sm:m-4 select-none">
                                 <div className="py-3 my-auto xs:px-3 sm:px-5 text-white text-sm font-semibold sm:mr-3 custom-radio-field">Login as</div>
                                 <label className="flex p-2 xs:items-center sm:items-start cursor-pointer">
-                                    <input className="my-auto transform scale-125" type="radio" name="role" />
-                                    <div className="px-2">Recruiter</div>
+                                    <input className="my-auto transform scale-125"
+                                        type="radio"
+                                        name="role"
+                                        value={"recruiter"}
+                                        onClick={() => { setRadio('recruiter') }}
+                                    />
+                                    <span className="px-2">Recruiter</span>
                                 </label>
 
                                 <label className="flex xs:items-center sm:items-start p-2 cursor-pointer">
-                                    <input className="my-auto transform scale-125" type="radio" name="role" />
-                                    <div className="px-2">Company</div>
+                                    <input
+                                        className="my-auto transform scale-125"
+                                        type="radio"
+                                        name="role"
+                                        value={"company"}
+                                        onClick={() => { setRadio('company') }}
+                                    />
+                                    <span className="px-2">Company</span>
                                 </label>
+                                {errors.rememberMe && <span>This field is required</span>}
+
                             </div>
                         </div>
                         <div className='xs:w-3/4 lg:w-2/4'>
                             <div className='w-full'>
-                                <label className='flex flex-col w-full relative'>
+                                <label htmlFor="email" className='flex flex-col w-full relative'>
                                     <span>Email</span>
-                                    <input type="email" name="" id="" className='py-2 pr-2 pl-10  rounded-md border-2 mt-2 border-[#2068FF] w-full focus:bg-[#2067ff77] text-[#444444] focus:placeholder:text-[#444444]' placeholder='Enter Email' />
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        {...register("email", { required: true })}
+
+                                        className='py-2 pr-2 pl-10  rounded-md border-2 mt-2 border-[#2068FF] w-full focus:bg-[#2067ff77] text-[#444444] focus:placeholder:text-[#444444]'
+                                        placeholder='Enter Email'
+                                    />
                                     <AiOutlineMail className='absolute top-[43px] left-2 text-2xl' />
                                 </label>
+                                {errors.password && <span>Email is required</span>}
                             </div>
                             <div className='w-full mt-4'>
-                                <label className='flex flex-col w-full relative'>
+                                <label htmlFor="password" className='flex flex-col w-full relative'>
                                     <span>Password</span>
-                                    <input type="password" name="" id="" className='py-2 pr-2 pl-10  rounded-md border-2 mt-2 border-[#2068FF] w-full focus:bg-[#2067ff77] text-[#444444] focus:placeholder:text-[#444444]' placeholder='Enter Password' />
+                                    <input type="password" name="password" {...register("password", { required: true })} className='py-2 pr-2 pl-10  rounded-md border-2 mt-2 border-[#2068FF] w-full focus:bg-[#2067ff77] text-[#444444] focus:placeholder:text-[#444444]' placeholder='Enter Password' />
                                     <AiOutlineLock className='absolute top-[43px] left-2 text-2xl' />
                                 </label>
+                                {errors.password && <span>Password is required</span>}
+
                             </div>
 
                             <p className='text-right text-blue-500 font-semibold mt-2'>Forgot password?</p>
