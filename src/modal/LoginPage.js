@@ -42,12 +42,12 @@ const LoginPage = () => {
                             <div className="flex border border-1 border-[#2068FF] sm:rounded-full overflow-hidden xs:m-2 sm:m-4 select-none">
                                 <div className="py-3 my-auto xs:px-3 sm:px-5 text-white text-sm font-semibold sm:mr-3 custom-radio-field">Login as</div>
                                 <label className="flex p-2 xs:items-center sm:items-start cursor-pointer">
-                                    <input className="my-auto transform scale-125" type="radio" name="recruiter" />
+                                    <input className="my-auto transform scale-125" type="radio" name="role" />
                                     <div className="px-2">Recruiter</div>
                                 </label>
 
                                 <label className="flex xs:items-center sm:items-start p-2 cursor-pointer">
-                                    <input className="my-auto transform scale-125" type="radio" name="company" />
+                                    <input className="my-auto transform scale-125" type="radio" name="role" />
                                     <div className="px-2">Company</div>
                                 </label>
                             </div>
